@@ -38,8 +38,8 @@
             window.addEventListener("devicemotion",function(event){
                 var grav = event.accelerationIncludingGravity;
                 var aaa = event.acceleration;
-                gravity.innerHTML = grav
-                aa.innerHTML = aaa
+                gravity.innerHTML = `X : ${grav.x} ，Y : ${grav.y} ， Z : ${grav.z}`;
+                aa.innerHTML =  `X : ${aaa.x} ，Y : ${aaa.y} ， Z : ${aaa.z}`;
             },true);
         } else {
             alert("不能获得加速度信息");
