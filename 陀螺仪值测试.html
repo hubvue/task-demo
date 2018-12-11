@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    alpha : <span id="alpha"></span><br/>
+    beta : <span id="beta"></span><br/>
+    gamma : <span id="gamma"></span><br/>
+    重力加速度：<span id="gravity"></span><br/>
+    加速度：<span id="aa"></span><br/>
+    <script>
+        var a = document.getElementById("alpha");
+        var b = document.getElementById("beta");
+        var g = document.getElementById("gamma");
+        var gravity = document.getElementById("gravity");
+        var aa = document.getElementById("aa");
+        //获得旋转角度
+        window.addEventListener("deviceorientation",function(event){
+            var alpha = event.alpha;
+            var beta = event.beta;
+            var gamma = event.gamma;
+            a.innerHTML = Math.floor(alpha);
+            b.innerHTML = Math.floor(beta);
+            g.innerHTML = Math.floor(gamma);
+        });
+        //罗盘校准监听事件
+        window.addEventListener("compassneedscailbration",function(event){
+            alert("请校准罗盘！");
+            event.preventDefault();
+
+        })
+        //获取加速度信息
+        if(window.DeviceMotionEvent){
+            window.addEventListener("devicemotion",function(event){
+                var grav = event.accelerationIncludingGravity;
+                var aaa = event.acceleration;
+                gravity.innerHTML = `X : ${parseInt(grav.x)} ，Y : ${parseInt(grav.y)} ， Z : ${parseInt(grav.z)}`;
+                aa.innerHTML =  `X : ${parseInt(aaa.x)} ，Y : ${parseInt(aaa.y)} ， Z : ${parseInt(aaa.z)}`;
+            },true);
+        } else {
+            alert("不能获得加速度信息");
+        }
+        
+
+    </script>
+
+</body>
+</html>
