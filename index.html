@@ -34,12 +34,17 @@
 
         })
         //获取加速度信息
-        window.addEventListener("devicemotion",function(event){
-            var grav = event.accelerationIncludingGravity;
-            var aaa = event.acceleration;
-            gravity.innerHTML = grav.toFixed(2);
-            aa.innerHTML = aaa.toFixed(2);
-        })
+        if(window.DeviceMotionEvent){
+            window.addEventListener("devicemotion",function(event){
+                var grav = event.accelerationIncludingGravity;
+                var aaa = event.acceleration;
+                gravity.innerHTML = grav.toFixed(2);
+                aa.innerHTML = aaa.toFixed(2);
+            },true);
+        } else {
+            alert("不能获得加速度信息");
+        }
+        
 
     </script>
 
